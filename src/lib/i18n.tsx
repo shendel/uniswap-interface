@@ -1,6 +1,5 @@
 import { i18n } from '@lingui/core'
 import { I18nProvider } from '@lingui/react'
-import * as Sentry from '@sentry/react'
 import { DEFAULT_LOCALE, SupportedLocale } from 'constants/locales'
 import {
   af,
@@ -36,6 +35,7 @@ import {
 } from 'make-plural/plurals'
 import { PluralCategory } from 'make-plural/plurals'
 import { ReactNode, useEffect } from 'react'
+import { retry } from 'utils/retry'
 
 type LocalePlural = {
   [key in SupportedLocale]: (n: number | string, ord?: boolean) => PluralCategory
@@ -80,12 +80,11 @@ const plurals: LocalePlural = {
 export async function dynamicActivate(locale: SupportedLocale) {
   i18n.loadLocaleData(locale, { plurals: () => plurals[locale] })
   try {
-    const catalog = await import(`locales/${locale}.js`)
+    const catalog = await retry(() => import(`locales/${locale}.js`))
     // Bundlers will either export it as default or as a named export named default.
     i18n.load(locale, catalog.messages || catalog.default.messages)
-  } catch (error) {
-    console.error(error)
-    Sentry.captureException(new Error(`Unable to load locale (${locale})`))
+  } catch (error: unknown) {
+    console.error(new Error(`Unable to load locale (${locale}): ${error}`))
   }
   i18n.activate(locale)
 }

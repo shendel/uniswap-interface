@@ -1,8 +1,8 @@
 import { Currency, Ether, NativeCurrency, Token, WETH9 } from '@uniswap/sdk-core'
-import { SupportedChainId } from 'constants/chains'
 import invariant from 'tiny-invariant'
 
 import { UNI_ADDRESS } from './addresses'
+import { SupportedChainId } from './chains'
 
 export const NATIVE_CHAIN_ID = 'NATIVE'
 
@@ -359,6 +359,14 @@ export const UNI: { [chainId: number]: Token } = {
   [SupportedChainId.GOERLI]: new Token(SupportedChainId.GOERLI, UNI_ADDRESS[5], 18, 'UNI', 'Uniswap'),
 }
 
+export const ARB = new Token(
+  SupportedChainId.ARBITRUM_ONE,
+  '0x912CE59144191C1204E64559FE8253a0e49E6548',
+  18,
+  'ARB',
+  'Arbitrum'
+)
+
 export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } = {
   ...(WETH9 as Record<SupportedChainId, Token>),
   [SupportedChainId.OPTIMISM]: new Token(
@@ -513,6 +521,13 @@ export function nativeOnChain(chainId: number): NativeCurrency | Token {
     nativeCurrency = ExtendedEther.onChain(chainId)
   }
   return (cachedNativeCurrency[chainId] = nativeCurrency)
+}
+
+export function getSwapCurrencyId(currency: Currency): string {
+  if (currency.isToken) {
+    return currency.address
+  }
+  return NATIVE_CHAIN_ID
 }
 
 export const TOKEN_SHORTHANDS: { [shorthand: string]: { [chainId in SupportedChainId]?: string } } = {

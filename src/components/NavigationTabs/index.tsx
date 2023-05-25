@@ -21,7 +21,7 @@ const Tabs = styled.div`
   justify-content: space-evenly;
 `
 
-const StyledHistoryLink = styled(HistoryLink)<{ flex: string | undefined }>`
+const StyledHistoryLink = styled(HistoryLink)<{ flex?: string }>`
   flex: ${({ flex }) => flex ?? 'none'};
 
   ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToMedium`
@@ -57,16 +57,16 @@ export function FindPoolTabs({ origin }: { origin: string }) {
 export function AddRemoveTabs({
   adding,
   creating,
-  defaultSlippage,
+  autoSlippage,
   positionID,
   children,
 }: {
   adding: boolean
   creating: boolean
-  defaultSlippage: Percent
-  positionID?: string | undefined
+  autoSlippage: Percent
+  positionID?: string
   showBackLink?: boolean
-  children?: ReactNode | undefined
+  children?: ReactNode
 }) {
   const theme = useTheme()
   // reset states on back
@@ -108,7 +108,7 @@ export function AddRemoveTabs({
           )}
         </ThemedText.DeprecatedMediumHeader>
         <Box style={{ marginRight: '.5rem' }}>{children}</Box>
-        <SettingsTab placeholderSlippage={defaultSlippage} />
+        <SettingsTab autoSlippage={autoSlippage} />
       </RowBetween>
     </Tabs>
   )

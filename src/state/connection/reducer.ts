@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { ConnectionType } from 'connection'
+import { ConnectionType } from 'connection/types'
 
 interface ConnectionState {
   errorByConnectionType: Record<ConnectionType, string | undefined>
@@ -22,7 +22,7 @@ const connectionSlice = createSlice({
   reducers: {
     updateConnectionError(
       state,
-      { payload: { connectionType, error } }: { payload: { connectionType: ConnectionType; error: string | undefined } }
+      { payload: { connectionType, error } }: { payload: { connectionType: ConnectionType; error?: string } }
     ) {
       state.errorByConnectionType[connectionType] = error
     },
