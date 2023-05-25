@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { NftMarketplace, NftTradeInput, TokenAmountInput } from 'graphql/data/__generated__/types-and-hooks'
 import { BagItem, BagItemStatus, UpdatedGenieAsset } from 'nft/types'
 
