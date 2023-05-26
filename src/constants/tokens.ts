@@ -432,6 +432,14 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } =
     'WBNB',
     'Wrapped BNB'
   ),
+  
+  [SupportedChainId.BASE_GOERLI]: new Token(
+    SupportedChainId.BASE_GOERLI,
+    '0x48d7ac38530697aDB91061B6D141C8c763edE565',
+    18,
+    'WETH',
+    'Wrapped ETH'
+  ),
 }
 
 export function isCelo(chainId: number): chainId is SupportedChainId.CELO | SupportedChainId.CELO_ALFAJORES {

@@ -66,6 +66,7 @@ export const PageTabs = () => {
       <MenuItem href="/swap" isActive={pathname.startsWith('/swap')}>
         <Trans>Swap</Trans>
       </MenuItem>
+      {/*
       <MenuItem href={`/tokens/${chainName.toLowerCase()}`} isActive={pathname.startsWith('/tokens')}>
         <Trans>Tokens</Trans>
       </MenuItem>
@@ -74,14 +75,17 @@ export const PageTabs = () => {
           <Trans>NFTs</Trans>
         </MenuItem>
       )}
+      */}
       <Box display={{ sm: 'flex', lg: 'none', xxl: 'flex' }} width="full">
         <MenuItem href="/pools" dataTestId="pool-nav-link" isActive={isPoolActive}>
           <Trans>Pools</Trans>
         </MenuItem>
       </Box>
+      {/*
       <Box marginY={{ sm: '4', md: 'unset' }}>
         <MenuDropdown />
       </Box>
+      */}
     </>
   )
 }
@@ -104,10 +108,12 @@ const Navbar = ({ blur }: { blur: boolean }) => {
                 data-testid="uniswap-logo"
                 className={styles.logo}
                 onClick={() => {
+                  /*
                   navigate({
                     pathname: '/',
                     search: '?intro=true',
                   })
+                  */
                 }}
               />
             </Box>
@@ -120,15 +126,19 @@ const Navbar = ({ blur }: { blur: boolean }) => {
               <PageTabs />
             </Row>
           </Box>
+          {/*
           <Box className={styles.searchContainer}>
             <SearchBar />
           </Box>
+          */}
           <Box className={styles.rightSideContainer}>
             <Row gap="12">
+              {/*
               <Box position="relative" display={{ sm: 'flex', navSearchInputVisible: 'none' }}>
                 <SearchBar />
               </Box>
               {isNftPage && sellPageState !== ProfilePageStateType.LISTING && <Bag />}
+              */}
               {!isNftPage && (
                 <Box display={{ sm: 'none', lg: 'flex' }}>
                   <ChainSelector />

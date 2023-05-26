@@ -783,7 +783,7 @@ function AddLiquidity() {
                               </Trans>
                             </AutoRow>
                           )}
-
+<div>THIS</div>
                           <LiquidityChartRangeInput
                             currencyA={baseCurrency ?? undefined}
                             currencyB={quoteCurrency ?? undefined}

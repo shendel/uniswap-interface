@@ -17,6 +17,7 @@ import { didUserReject, swapErrorToUserReadableMessage } from 'utils/swapErrorTo
 
 import { PermitSignature } from './usePermitAllowance'
 
+console.log('>>> UNIVERSAL_ROUTER_ADDRESS', UNIVERSAL_ROUTER_ADDRESS, UNIVERSAL_ROUTER_ADDRESS(1))
 /** Thrown when gas estimation fails. This class of error usually requires an emulator to determine the root cause. */
 class GasEstimationError extends Error {
   constructor() {
